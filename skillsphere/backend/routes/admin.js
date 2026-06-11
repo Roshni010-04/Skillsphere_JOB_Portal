@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const { protect, authorize } = require('../middleware/auth');
+const ctrl = require('../controllers/controllers');
+router.get('/dashboard', protect, authorize('admin'), ctrl.getDashboard);
+router.get('/users', protect, authorize('admin'), ctrl.getAllUsers);
+router.put('/users/:id/suspend', protect, authorize('admin'), ctrl.suspendUser);
+router.put('/users/:id/verify', protect, authorize('admin'), ctrl.verifyFreelancer);
+router.get('/disputes', protect, authorize('admin'), ctrl.getAllDisputes);
+router.put('/disputes/:id/resolve', protect, authorize('admin'), ctrl.resolveDispute);
+module.exports = router;
